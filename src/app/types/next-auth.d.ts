@@ -14,4 +14,14 @@ declare module "next-auth" {
             image: string | null,
         }
     }
+    interface SignIn {
+        user: {
+            /** The user's postal address. */
+            id: string,
+            name: string | null,
+            email: string,
+            emailVerified: Date | null,
+            image: string | null,
+        }
+    }
 }

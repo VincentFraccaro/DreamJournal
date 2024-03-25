@@ -25,14 +25,15 @@ const handler = NextAuth({
 
             })
             if (!userExists) {
+                let now = new Date().toISOString();
                 console.log(user);
-                let now = new Date().toISOString()
                 // User does not exist, create a new user
+                // @ts-ignore
                 await db.insert(users).values({
-                    id: user.id, // You might need to generate this ID based on your database requirements
-                    name: user.name,
-                    email: user.email,
-                    image: user.image,
+                    id: user.id,
+                    name: user.name ?? null,
+                    email: user.email, // Required field
+                    image: user.image ?? null,
                 });
             }
             return true;
