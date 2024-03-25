@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import {cn} from "@/lib/utils";
+import React from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +18,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={cn("min-h-[100vh] bg-gradient-to-t from-[#610F7F] via-[#9C528B] via-50% to-[#B9929F]")}>{children}</body>
+      {/*<body className={cn("min-h-[100vh] bg-gradient-to-t from-[#12001C] via-[#3F2138] via-50% to-[#51343D]")}>{children}</body>*/}
     </html>
   );
 }
