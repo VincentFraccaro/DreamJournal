@@ -14,13 +14,13 @@ export async function GET(req: NextRequest, res: NextResponse) {
     }
 
     // Assuming the token includes the user's email or ID, use it to fetch user-specific data
-    const userEmail = String(token.sub);
-    if (!userEmail) {
+    const userId = String(token.sub);
+    if (!userId) {
         return NextResponse.json({ error: 'User not found' }, {status: 401});
     }
 
     // Fetch user-specific dreams from the database
-    const userDreams = await db.select().from(dreams).where(eq(dreams.userId, userEmail)).execute();
+    const userDreams = await db.select().from(dreams).where(eq(dreams.userId, userId)).execute();
 
     return NextResponse.json(userDreams);
 }

@@ -29,7 +29,7 @@ const DreamDialog = ({onDreamAdded = () => {}}) => {
 
     const submitDreams = async (values:any) => {
         try {
-            const response = await fetch('http://localhost:3000/api/dreams', {
+            const response = await fetch('/api/dreams', {
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/json'
