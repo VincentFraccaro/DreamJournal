@@ -13,7 +13,7 @@ export default function DreamsPage() {
                 <title>About Dreams</title>
             </Head>
 
-            <main className="max-w-4xl mx-auto">
+            <main className="border rounded-lg p-4 shadow-md bg-white bg-opacity-50 sm:w-full lg:w-5/6 xl:w-2/3 2xl:w-1/2 mx-auto p-5">
                 <h1 className="text-4xl font-bold text-center mb-12">Understanding Dreams</h1>
 
                 <section className="mb-10">
@@ -30,7 +30,7 @@ export default function DreamsPage() {
                     <p className="text-lg mb-3">
                         The sleep cycle consists of five stages, including Rapid Eye Movement (REM) and non-REM sleep.
                         While dreams can occur at any stage, they are most prominent and memorable during REM sleep.
-                        Each cycle lasts about 90 minutes, and the sequence repeats several times throughout the
+                        Each cycle lasts about 90 minutes, and the sequence repeats several times   throughout the
                         night. </p>
                 </section>
 

@@ -15,6 +15,8 @@ import {
     DialogTitle,
     DialogTrigger
 } from "@/components/ui/dialog";
+import {DatePicker} from "@/components/ui/datepicker";
+import {DateTime} from "luxon";
 
 const DreamDialog = ({onDreamAdded = () => {}}) => {
     const [open, setOpen] = useState(false);
@@ -25,6 +27,7 @@ const DreamDialog = ({onDreamAdded = () => {}}) => {
         }),
         content: z.string(),
         is_lucid: z.boolean(),
+        timestamp: z.coerce.date(),
     });
 
     const submitDreams = async (values:any) => {
@@ -52,12 +55,15 @@ const DreamDialog = ({onDreamAdded = () => {}}) => {
                 title: "",
                 content: "",
                 is_lucid: false,
+                timestamp: new Date(),
             },
         });
 
         const handleSubmit = (data:any) => {
             console.log(data);
             setOpen(false);
+            data = {...data, timestamp: DateTime.fromJSDate(data.timestamp).toUTC()};
+            console.log("Updated values are ", data)
             submitDreams(data).then(r => {});
         };
 
@@ -103,6 +109,18 @@ const DreamDialog = ({onDreamAdded = () => {}}) => {
                                 <FormControl>
                                     <input className={"m-1"} type={"checkbox"} id={"is_lucid"} value={field.value ? "true" : "false"}
                                            onChange={field.onChange} onBlur={field.onBlur}/>
+                                </FormControl>
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="timestamp"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Date</FormLabel>
+                                <FormControl>
+                                    <DatePicker key={"timestamp"}></DatePicker>
                                 </FormControl>
                             </FormItem>
                         )}

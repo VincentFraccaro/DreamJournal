@@ -40,14 +40,23 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     const data = await req.json();
 
-    const dream = await db.insert(dreams).values({
-        userId: userId,
-        content: data.content,
-        timestamp: data.date,
-        isLucid: data.is_lucid,
-        title: data.title
-    })
+    if (data.timestamp && typeof data.timestamp === 'string') {
+        data.timestamp = new Date(data.timestamp);
+    }
 
-    return NextResponse.json(dream);
+    try {
+        const dream = await db.insert(dreams).values({
+            userId: userId,
+            content: data.content,
+            timestamp: data.timestamp, // This should now be a Date object
+            isLucid: data.is_lucid,
+            title: data.title
+        });
+
+        return NextResponse.json(dream);
+    } catch (error:any) {
+        console.error("Error inserting dream:", error);
+        return NextResponse.json({ error: 'Internal Server Error', message: error.message }, { status: 500 });
+    }
 }
 
